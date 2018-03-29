@@ -15,6 +15,10 @@
 
 // Author: Stéphane Démurget <stephane.demurget@free.fr>
 
+imports.gi.versions.Gtk = '3.0';
+imports.gi.versions.Gdk = '3.0';
+imports.gi.versions.GdkX11 = '3.0';
+
 const Lang = imports.lang;
 const MainLoop = imports.mainloop;
 

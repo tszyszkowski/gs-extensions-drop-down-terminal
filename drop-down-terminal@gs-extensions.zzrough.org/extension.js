@@ -15,6 +15,10 @@
 
 // Author: Stéphane Démurget <stephane.demurget@free.fr>
 
+imports.gi.versions.Gtk = '3.0';
+imports.gi.versions.Gdk = '3.0';
+imports.gi.versions.GdkX11 = '3.0';
+
 const Lang = imports.lang;
 const Gettext = imports.gettext.domain("drop-down-terminal");
 const Mainloop = imports.mainloop;
@@ -535,7 +539,7 @@ const DropDownTerminalExtension = new Lang.Class({
     _bindShortcut: function() {
         if (Main.wm.addKeybinding && Shell.ActionMode) // introduced in 3.16
             Main.wm.addKeybinding(REAL_SHORTCUT_SETTING_KEY, this._settings, Meta.KeyBindingFlags.NONE,
-                                  Shell.ActionMode.NORMAL | Shell.ActionMode.MESSAGE_TRAY,
+                                  Shell.ActionMode.NORMAL,
                                   Lang.bind(this, this._toggle));
         else if (Main.wm.addKeybinding && Shell.KeyBindingMode) // introduced in 3.7.5
             Main.wm.addKeybinding(REAL_SHORTCUT_SETTING_KEY, this._settings, Meta.KeyBindingFlags.NONE,
@@ -687,7 +691,7 @@ const DropDownTerminalExtension = new Lang.Class({
         this._childPid = pid;
 
         // adds a watch to know when the child process ends
-        GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, Lang.bind(this, this._childExited), null);
+        GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, Lang.bind(this, this._childExited));
     },
 
     _killChild: function() {
